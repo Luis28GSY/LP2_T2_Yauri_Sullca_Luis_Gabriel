@@ -51,7 +51,18 @@ public class EmpleadoController {
 	}
 	
 	@PostMapping("/registrar_empleado")
-	public String RegistrarEmpleado(Model model, @ModelAttribute EmpleadosEntity empleado) {
+	public String RegistrarEmpleado(@ModelAttribute EmpleadosEntity empleado, Model model) {
+		
+		if(empleadorepository.findByDniEmpleado(empleado.getDniEmpleado()) != null) {
+			
+			List<AreaEntity> areas = arearepository.findAll();
+			
+			model.addAttribute("errorCodigo", "El codigo ya existe");
+			model.addAttribute("emp", new EmpleadosEntity());
+			model.addAttribute("lista_areas", areas);
+			
+			return "registrar_empleado";
+		}
 		
 		empleadorepository.save(empleado);
 		
@@ -72,6 +83,23 @@ public class EmpleadoController {
 		
 		return "actualizar_empleado";
 		 
+	}
+	
+	@PostMapping("/actualizar_empleado")
+	public String ActualizarEmpleado(@ModelAttribute EmpleadosEntity empleado, Model model) {
+	
+		empleadorepository.save(empleado);
+		
+		return "redirect:/lista";
+		
+	}
+	
+	@GetMapping("/delete_empleado/{idYauri}")
+	public String eliminarEmpleado(@PathVariable("idYauri")String id) {
+		
+		empleadorepository.deleteById(id);
+		
+		return "redirect:/lista";
 	}
 
 }

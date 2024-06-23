@@ -14,32 +14,37 @@
     <form th:action="@{/registrar_empleado}" th:object="${emp}" method="post">
     
     	<div class="form-group">
-            <label for="nombre">DNI Empleado</label>
-            <input type="text" class="form-control" id="DNIempleado" th:field="*{dniEmpleado}" placeholder="Ingrese su nombre" required>
+            <label for="DNI">DNI Empleado</label>
+            <input type="text" class="form-control" id="DNIempleado" th:field="*{dniEmpleado}" placeholder="Ingrese su DNI" required>
+        
+        <div th:if="${errorCodigo}" class="alert alert-danger" role="alert">
+        <span th:text="${errorCodigo}"></span>
+    	</div>
+        
         </div>
         <div class="form-group">
-            <label for="nombre">Nombre Empleado</label>
+            <label for="Nombre">Nombre Empleado</label>
             <input type="text" class="form-control" id="nombreEmpleado" th:field="*{nombreEmpleado}" placeholder="Ingrese su nombre" required>
         </div>
         <div class="form-group">
-            <label for="correo">Apellido Empleado</label>
-            <input type="text" class="form-control" id="apellidoEmpleado" th:field="*{apellidoEmpleado}" placeholder="Ingrese su correo electrónico" required>
+            <label for="Apellido">Apellido Empleado</label>
+            <input type="text" class="form-control" id="apellidoEmpleado" th:field="*{apellidoEmpleado}" placeholder="Ingrese su Apellido" required>
         </div>
         <div class="form-group">
-            <label for="correo">Fecha Nacimiento</label>
-            <input type="date" class="form-control" id="FechaEmpleado" th:field="*{fechaNacimiento}" placeholder="Ingrese su correo electrónico" required>
+            <label for="Fecha">Fecha Nacimiento</label>
+            <input type="date" class="form-control" id="FechaEmpleado" th:field="*{fechaNacimiento}" placeholder="Ingrese su fecha nacimiento" required>
         </div>
         <div class="form-group">
-            <label for="correo">Direccion:</label>
-            <input type="text" class="form-control" id="Direccion" th:field="*{direccion}" placeholder="Ingrese su correo electrónico" required>
+            <label for="Direccion">Direccion:</label>
+            <input type="text" class="form-control" id="Direccion" th:field="*{direccion}" placeholder="Ingrese su direccion" required>
         </div>
         <div class="form-group">
-            <label for="password">Correo</label>
-            <input type="email" class="form-control" id="correoEmpleado" th:field="*{correo}" placeholder="Ingrese su contraseña" required>
+            <label for="Correo">Correo</label>
+            <input type="email" class="form-control" id="correoEmpleado" th:field="*{correo}" placeholder="Ingrese su correo" required>
         </div>
         
         <div class="form-group">
-      <label for="categoria">Seleccione Empleado</label>
+      <label for="Area">Seleccione Area</label>
       <select  name="itemId" id="areas" class="form-control" th:field="*{areaentity.areaId}">
         <option value="" disabled selected>Selecciona una categoría</option>
         <option th:each="area : ${lista_areas}" th:value="${area.areaId}" th:text="${area.nombreArea}"></option>
